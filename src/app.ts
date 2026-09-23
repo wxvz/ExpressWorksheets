@@ -7,8 +7,6 @@ import { connectDB } from "./config/database";
 
 
 const port = env.port;
-
-
 const app: Application = express();
 
 app.use('/api/v1/cars', carRoutes);
@@ -41,4 +39,3 @@ const startServer = async () => {
     console.log(`Server running on port ${port}`);
   });
 };
-startServer();
