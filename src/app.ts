@@ -6,7 +6,12 @@ const app: Application = express();
 
 app.get("/ping", async (_req : Request, res: Response) => {
     res.json({
-    message: "hello from Una"
+    message: "hello from Frank's server"
+    });
+});
+app.get("/pineapple", async (_req : Request, res: Response) => {
+    res.json({
+    message: "hello from Pineapple route"
     });
 });
 
