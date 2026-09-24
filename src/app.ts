@@ -28,10 +28,6 @@ app.get("/pineapple", async (_req : Request, res: Response) => {
     });
 });
 
-app.listen(port, () => {
-    console.log("Server is running on port", port   );
-    });
-
 const startServer = async () => {
   await connectDB();
 
@@ -39,3 +35,4 @@ const startServer = async () => {
     console.log(`Server running on port ${port}`);
   });
 };
+startServer();
