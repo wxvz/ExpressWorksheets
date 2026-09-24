@@ -1,12 +1,23 @@
 @endpoint = http://localhost:3000/api/v1/cars
 
 ###
+# @name postACar
+
+
 POST {{endpoint}} HTTP/1.1
 content-type: application/json
 
+{
+    "make": "make2",
+    "model": "model2"
+}
+
 
 ###
-GET  {{endpoint}} HTTP/3.0
+
+@newCar = {{postACar.response.body._id}}
+###
+GET  {{endpoint}}/{{newCar}} HTTP/3.0
 content-type: application/json
 
 ###
