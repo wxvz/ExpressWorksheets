@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { z } from 'zod';
 
 export interface ICar {
   make: string;
@@ -22,6 +23,7 @@ const carSchema = new Schema<ICar>(
   {
     make: { type: String, required: true },
     model: { type: String, required: true },
+    year: { type: Number, min: 1950 },
   },
   { timestamps: true }
 );
