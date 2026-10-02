@@ -67,6 +67,27 @@ export class CarController {
 
   };
 
+    /**
+ * @openapi
+ * /cars:
+ *   post:
+ *     summary: Create a new car
+ *     tags:
+ *       - Cars
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateCarInput'
+ *     responses:
+ *       201:
+ *         description: Successfully created car
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal server error
+ */
   createCar = async (req: Request, res: Response): Promise<void> => {
     const validation = carSchemaZod.safeParse(req.body);
 
