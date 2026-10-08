@@ -4,12 +4,21 @@ import { env } from "./config/env";
 import { connectDB } from "./config/database";
 import {authenticateKey} from './middleware/auth.middleware';
 import { routeLogging } from './middleware/route.middleware';
+import { swaggerSpec } from "./config/swagger";
+import swaggerUi from 'swagger-ui-express';
 
 
 const port = env.port;
 const app: Application = express();
 
 app.use('/api/v1/cars',authenticateKey, carRoutes);
+
+app.use(
+'/api-docs',
+swaggerUi.serve,
+swaggerUi.setup(swaggerSpec)
+);
+  
 app.use(express.json());
 
 app.use((req, _res, next) => {  
