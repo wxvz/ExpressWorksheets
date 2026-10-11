@@ -8,6 +8,7 @@ import swaggerUi from 'swagger-ui-express';
 
 export const app: Application = express();
 
+app.use(express.json());
 app.use('/api/v1/items',authenticateKey, itemRoutes);
 
 app.use(
@@ -16,7 +17,7 @@ swaggerUi.serve,
 swaggerUi.setup(swaggerSpec)
 );
   
-app.use(express.json());
+
 
 app.use((req, _res, next) => {  
     routeLogging(req, _res, next);

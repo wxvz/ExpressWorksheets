@@ -27,22 +27,24 @@ x-api-key: 12345
 ###
 GET  {{endpoint}}/{{newItemID}} HTTP/3.0
 content-type: application/json
-
+x-api-key: 12345
 
 
 
 ###
 GET  {{endpoint}}/{{newItemID}} HTTP/3.0
-
 content-type: application/json
-
+x-api-key: 12345
 
 ###
 
 DELETE  {{endpoint}}/{{newItemID}} HTTP/3.0
 content-type: application/json
+x-api-key: 12345
 
 ###
 
 PUT  {{endpoint}}/{{newItemID}} HTTP/3.0
 content-type: application/json
+x-api-key: 12345
+

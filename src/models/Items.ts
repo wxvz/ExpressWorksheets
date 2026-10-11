@@ -62,7 +62,7 @@ export const itemSchemaZod = z.object({
   colour: z.string().min(1),
   brand: z.string().min(1).optional(),
   location: z.string().min(1).optional(),
-  dateFound: z.date(),
+  dateFound: z.coerce.date(),
   notes: z.string().min(1).optional(),
   status: z.enum(["open", "matched", "returned"]),
 });
@@ -93,7 +93,7 @@ export const updateItemSchemaZod = z.object({
   colour: z.string().min(1).optional(),
   brand: z.string().min(1).optional(),
   location: z.string().min(1).optional(),
-  dateFound: z.date().optional(),
+  dateFound: z.coerce.date().optional(),
   notes: z.string().min(1).optional(),
   status: z.enum(["open", "matched", "returned"]).optional(),
 });
