@@ -1,5 +1,5 @@
 import express, {Application, Request, Response} from "express" ;
-import carRoutes from './routes/cars';
+import itemRoutes from './routes/Items';
 import { env } from "./config/env";
 import { connectDB } from "./config/database";
 import {authenticateKey} from './middleware/auth.middleware';
@@ -11,7 +11,7 @@ import swaggerUi from 'swagger-ui-express';
 const port = env.port;
 const app: Application = express();
 
-app.use('/api/v1/cars',authenticateKey, carRoutes);
+app.use('/api/v1/items',authenticateKey, itemRoutes);
 
 app.use(
 '/api-docs',
