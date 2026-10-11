@@ -12,11 +12,11 @@ x-api-key: 12345
   "type": "lost",
   "category": "Stationery",
   "itemName": "Pen",
-  "colour": "red",
+  "colour": "black",
   "brand": "Bic",
   "location": "D2010",
   "dateFound": "2026-10-11",
-  "notes": "I lost my red bic pen in the office",
+  "notes": "I lost my black bic pen in the office",
   "status": "open"
 }
 
@@ -24,19 +24,46 @@ x-api-key: 12345
 ###
 
 @newItemID = {{postAnItem.response.body._id}}
+
+
 ###
-GET  {{endpoint}}/{{newItemID}} HTTP/3.0
+# @name InvalidItem
+
+POST {{endpoint}} HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+
+{
+  "type": "found",
+  "category": "",
+  "itemName": "Pen",
+  "colour": "red",
+  "brand": "Bic",
+  "location": "D2010",
+  "dateFound": "2026-10-11",
+  "notes": "I found a red bic pen in the office",
+  "status": "open"
+}
+
+
+### Get all items
+GET  {{endpoint}}/ HTTP/3.0
 content-type: application/json
 x-api-key: 12345
 
 
-
-###
+### Get a specific item
 GET  {{endpoint}}/{{newItemID}} HTTP/3.0
 content-type: application/json
 x-api-key: 12345
 
 ###
+# 
+GET {{endpoint}}/123456789012 HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+
+### 
 
 DELETE  {{endpoint}}/{{newItemID}} HTTP/3.0
 content-type: application/json
@@ -44,7 +71,34 @@ x-api-key: 12345
 
 ###
 
-PUT  {{endpoint}}/{{newItemID}} HTTP/3.0
+DELETE {{endpoint}}/123456789012 HTTP/1.1
 content-type: application/json
 x-api-key: 12345
 
+###
+
+PUT {{endpoint}}/{{newItemID}} HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+
+{
+  "status": "matched"
+}
+
+###
+PUT {{endpoint}}/123456789012 HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+
+{
+  "status": "matched"
+}
+
+###
+PUT {{endpoint}}/{{newItemID}} HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+
+{
+  "category": ""
+}
