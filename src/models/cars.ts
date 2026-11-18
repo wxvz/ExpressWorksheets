@@ -33,6 +33,12 @@ export const carSchemaZod = z.object({
   year: z.number().min(150).optional(),
 });
 
+export const createCarSchemaZod = z.object({
+  make: z.string().min(1),
+  model: z.string().min(1),
+  year: z.number().min(150).optional(),
+});
+
 export const updateCarSchemaZod = z.object({
   make: z.string().min(1),
   model: z.string().min(1),
