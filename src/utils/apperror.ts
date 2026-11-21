@@ -9,6 +9,19 @@ export class AppError extends Error {
   }
 }
 
+export class UnauthorizedError  extends AppError {
+  constructor(message: string) {
+    super(message, 401);
+  }
+}
+
+export class UserAlreadyExistsError extends AppError {
+  constructor() {
+    super('User already exists', 409);
+  }
+}
+
+
 export class NotFoundError extends AppError {
   constructor(resource: string) {
     super(`${resource} not found`, 404);

@@ -4,11 +4,15 @@ import { ValidationError } from '../utils/apperror';
 
 export const validate = (schema: z.ZodObject<any>)   => (
     req: Request,
-    res: Response,
+    _res: Response,
     next: NextFunction
 ) : void => {
 
-  const validation = schema.safeParse(req.body);
+  const validation = schema.safeParse({
+    body: req.body,
+    params: req.params,
+    query: req.query
+  });
 
   if (!validation.success) {
 
@@ -18,7 +22,7 @@ export const validate = (schema: z.ZodObject<any>)   => (
   }
 
 
-  req.body = validation.data
+  req.body = validation.data.body;
 
   next();
 };

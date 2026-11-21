@@ -1,6 +1,6 @@
 import express, {Application, Request, Response} from "express" ;
 import carRoutes from './routes/cars';
-import { connectDB } from "./config/database";
+import authRoutes from './routes/auth';
 import {authenticateKey} from './middleware/auth.middleware';
 import { routeLogging } from './middleware/route.middleware';
 import { swaggerSpec } from "./config/swagger";
@@ -11,6 +11,8 @@ import { errorHandler } from "./middleware/errorHandling.middleware";
 
 export const app: Application = express();
 
+app.use(express.json());
+app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/cars',authenticateKey, carRoutes);
 app.use(errorHandler)
 app.use(
@@ -19,8 +21,6 @@ swaggerUi.serve,
 swaggerUi.setup(swaggerSpec)
 );
   
-app.use(express.json());
-
 app.use((req, _res, next) => {  
     routeLogging(req, _res, next);
 });
