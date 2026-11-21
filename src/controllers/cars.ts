@@ -137,11 +137,7 @@ export class CarController {
   deleteCar = async (_req: Request, res: Response): Promise<void> => {
     try {
       const id = Array.isArray(_req.params.id) ? _req.params.id[0] : _req.params.id;
-      const deletedCar = await carService.getCarById(id);
-      if (!deletedCar){
-        res.status(404).json({ message: 'Car not found' });
-        return;
-      }
+      const deletedCar = await carService.deleteCar(id);
       res.status(200).json(deletedCar);
     } catch (error) {
       res.status(500).json({ message: 'Error deleting car', error });

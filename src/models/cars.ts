@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose';
-import { z } from 'zod';
+import { Schema, model } from "mongoose";
+import { z } from "zod";
 
 export interface ICar {
   make: string;
@@ -33,25 +33,35 @@ export const carSchemaZod = z.object({
   year: z.number().min(150).optional(),
 });
 
-export const createCarSchemaZod = z.object({
-  make: z.string().min(1),
-  model: z.string().min(1),
-  year: z.number().min(150).optional(),
-});
-
-export const updateCarSchemaZod = z.object({
-  make: z.string().min(1),
-  model: z.string().min(1),
-  year: z.number().min(150).optional(),
-});
-
 const carSchema = new Schema<ICar>(
   {
     make: { type: String, required: true },
     model: { type: String, required: true },
     year: { type: Number, min: 1950 },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const CarModel = model<ICar>('Car', carSchema);
+export const createCarSchemaZod = z.object({
+  body: z.object({
+    make: z.string().min(1),
+    model: z.string().min(1),
+    year: z.number().min(1950).optional(),
+  }),
+});
+
+export const updateCarSchemaZod = z.object({
+  body: z.object({
+    make: z.string().min(1),
+    model: z.string().min(1),
+    year: z.number().min(1950).optional(),
+  }),
+});
+
+export const carParamsSchema = z.object({
+  params: z.object({
+    id: z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid ObjectId"),
+  }),
+});
+
+export const CarModel = model<ICar>("Car", carSchema);

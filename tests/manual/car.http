@@ -1,0 +1,54 @@
+@endpoint = http://localhost:3000/api/v1/cars
+# Paste a JWT returned by POST /api/v1/auth/login here to run DELETE.
+@accessToken = REPLACE_WITH_JWT
+
+###
+# @name postACar
+
+
+POST {{endpoint}} HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+
+{
+    "make": "make2",
+    "model": "model2",
+    "year": 2022
+}
+
+
+###
+
+@newCar = {{postACar.response.body._id}}
+###
+GET {{endpoint}}/{{newCar}} HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+
+
+
+
+###
+GET {{endpoint}}/sillycarID HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+
+
+###
+
+DELETE {{endpoint}}/{{newCar}} HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+Authorization: Bearer {{accessToken}}
+
+###
+
+PUT {{endpoint}}/sillycarID HTTP/1.1
+content-type: application/json
+x-api-key: 12345
+
+{
+    "make": "make2",
+    "model": "model2",
+    "year": 2023
+}
